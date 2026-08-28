@@ -1,0 +1,17 @@
+{
+  "appName": "PillDemo",
+  "version": "1.0.7",
+  "publisher": "ACME",
+  "exeRelPath": "app.exe",
+  "defaultInstallDir": "%ProgramFiles%\\PillDemo",
+  "allowChangeDir": true,
+  "createStartMenu": true,
+  "startMenuName": "我的应用",
+  "createDesktop": true,
+  "runAfterInstall": false,
+  "writeRegistry": true,
+  "registryKey": "Software\\我的应用",
+  "includeLicense": true,
+  "licenseText": "",
+  "language": "zh"
+}

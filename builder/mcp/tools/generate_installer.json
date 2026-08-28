@@ -1,0 +1,14 @@
+{
+  "name": "generate_installer",
+  "description": "根据配置生成 NSIS/Inno 安装脚本与配套文件（license/build.bat/build.ps1/README），不执行编译。",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "config": {
+        "type": "object",
+        "description": "打包配置（BuildConfig）：engine/appName/version/publisher/exeRelPath/files/includeLicense/licenseText/logoName/defaultInstallDir/createStartMenu/startMenuName/createDesktop/runAfterInstall/writeRegistry/registryKey/silentMode/uiStyle/language 等。"
+      }
+    },
+    "required": []
+  }
+}

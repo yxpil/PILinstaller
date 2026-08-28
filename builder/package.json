@@ -1,0 +1,32 @@
+{
+  "name": "pill-installer-builder",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Pill-style Installer Builder — 生成 NSIS / Inno Setup 打包安装脚本（支持静默安装）",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "build:tools": "esbuild tools/cli.ts --bundle --platform=node --format=esm --outfile=dist/cli.mjs && esbuild tools/mcpServer.ts --bundle --platform=node --format=esm --outfile=mcp/server.mjs",
+    "cli": "node dist/cli.mjs",
+    "cli:ts": "node --experimental-strip-types tools/cli.ts",
+    "mcp": "node mcp/server.mjs"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwind-merge": "^2.5.4"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.2",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.13",
+    "typescript": "^5.6.2",
+    "vite": "^5.4.8"
+  }
+}

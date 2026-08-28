@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <AssemblyName>PillInstaller</AssemblyName>
+    <RootNamespace>PillInstaller</RootNamespace>
+
+    <!-- 发布为单文件 exe（框架依赖，目标机器需已装 .NET 桌面运行时；可改为自托管避免依赖） -->
+    <PublishSingleFile>true</PublishSingleFile>
+    <SelfContained>false</SelfContained>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- app 产物（含 manifest.json）随安装器一起嵌入 -->
+    <EmbeddedResource Include="payload\**" />
+  </ItemGroup>
+
+</Project>

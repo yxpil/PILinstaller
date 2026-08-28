@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "pill-installer-builder": {
+      "command": "node",
+      "args": [
+        "C:\\Users\\yxpil\\Desktop\\PLinstaller\\builder\\mcp\\server.mjs"
+      ]
+    }
+  }
+}

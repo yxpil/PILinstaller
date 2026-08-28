@@ -1,0 +1,25 @@
+# ===== Node / Vite =====
+node_modules/
+builder/dist/
+builder/dist-installer/
+
+# ===== .NET 构建产物 =====
+builder/installer/bin/
+builder/installer/obj/
+builder/installer/_pub/
+builder/installer/_stage/
+builder/installer/_samplepub/
+builder/installer/payload/app.zip
+builder/samples/SampleApp/bin/
+builder/samples/SampleApp/obj/
+builder/samples/SampleApp/_pub/
+
+# CLI / MCP 编译产物（用 npm run build:tools 生成）
+builder/mcp/server.mjs
+
+# ===== 系统 / 编辑器 =====
+Thumbs.db
+.DS_Store
+*.log
+.vscode/
+.idea/

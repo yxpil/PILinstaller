@@ -1,0 +1,22 @@
+{
+  "name": "build_installer",
+  "description": "生成安装脚本并写入输出目录；设置 compile:true 时自动调用本机 ISCC(Inno Setup)/makensis(NSIS) 编译出安装包 .exe。",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "config": {
+        "type": "object",
+        "description": "打包配置（BuildConfig）。"
+      },
+      "outDir": {
+        "type": "string",
+        "description": "输出目录，默认 ./mcp-out"
+      },
+      "compile": {
+        "type": "boolean",
+        "description": "是否自动调用本机编译工具出包"
+      }
+    },
+    "required": []
+  }
+}

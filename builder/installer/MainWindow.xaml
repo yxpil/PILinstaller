@@ -1,0 +1,122 @@
+<Window x:Class="PillInstaller.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Pill Installer"
+        Width="780" Height="560"
+        WindowStyle="None" Background="#FFFFFF"
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        Closing="Window_Closing"
+        FontFamily="{StaticResource Sans}">
+
+  <Border Background="#FFFFFF" BorderBrush="{StaticResource Line}" BorderThickness="1">
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="76"/>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="76"/>
+      </Grid.RowDefinitions>
+
+      <!-- ===== 品牌栏 ===== -->
+      <Border Grid.Row="0" Background="{StaticResource Brand}">
+        <Grid>
+          <StackPanel Orientation="Horizontal" Margin="26,0,0,0" VerticalAlignment="Center">
+            <Border Width="44" Height="44" CornerRadius="22" Background="#FFFFFF">
+              <TextBlock x:Name="BrandInitial" Text="我" Foreground="#0A0A0A" FontSize="20"
+                         FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="14,0,0,0">
+              <TextBlock x:Name="BrandName" Text="我的应用" Foreground="#FFFFFF" FontSize="16" FontWeight="SemiBold"/>
+              <TextBlock x:Name="BrandVer" Text="1.0.0" Foreground="#9CA3AF" FontSize="11" Margin="10,3,0,0" VerticalAlignment="Bottom"/>
+            </StackPanel>
+          </StackPanel>
+          <Button x:Name="CloseBtn" Style="{StaticResource GhostCircle}" Content="✕"
+                  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,15,18,0" Click="CloseBtn_Click"/>
+        </Grid>
+      </Border>
+
+      <!-- ===== 正文 ===== -->
+      <Grid Grid.Row="1" Margin="40,28,40,12">
+        <!-- 欢迎 -->
+        <StackPanel x:Name="WelcomePanel" VerticalAlignment="Top">
+          <TextBlock Text="欢迎安装" FontSize="24" FontWeight="Bold" Foreground="{StaticResource Text}"/>
+          <TextBlock x:Name="WelcomeSub" Text="向导将把应用安装到你的电脑上。" FontSize="13" Foreground="{StaticResource Muted}" Margin="0,8,0,0" TextWrapping="Wrap"/>
+          <Separator Height="1" Margin="0,22,0,0" Background="{StaticResource Line}"/>
+          <StackPanel Margin="0,22,0,0">
+            <TextBlock Text="安装内容" FontSize="12" Foreground="{StaticResource Muted}" Margin="0,0,0,10"/>
+            <TextBlock Text="· 主程序与相关文件，保持相对目录结构" FontSize="13" Foreground="{StaticResource Text}" Margin="0,0,0,8"/>
+            <TextBlock Text="· 开始菜单 / 桌面快捷方式" FontSize="13" Foreground="{StaticResource Text}" Margin="0,0,0,8"/>
+            <TextBlock Text="· 注册表卸载项（控制面板可卸载）" FontSize="13" Foreground="{StaticResource Text}" Margin="0,0,0,8"/>
+          </StackPanel>
+        </StackPanel>
+
+        <!-- 许可 -->
+        <Grid x:Name="LicensePanel" Visibility="Collapsed">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/>
+          </Grid.RowDefinitions>
+          <TextBlock Text="许可协议" Grid.Row="0" FontSize="20" FontWeight="Bold" Foreground="{StaticResource Text}"/>
+          <Border Grid.Row="1" Margin="0,14,0,0" CornerRadius="18" Background="{StaticResource Soft}"
+                  BorderBrush="{StaticResource Line}" BorderThickness="1" Padding="18">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+              <TextBlock x:Name="LicenseText" Text="许可协议内容…" FontSize="12" Foreground="{StaticResource Text}"
+                         TextWrapping="Wrap" LineHeight="19"/>
+            </ScrollViewer>
+          </Border>
+          <CheckBox x:Name="AcceptBox" Grid.Row="2" Margin="2,18,0,0" FontSize="13"
+                    Foreground="{StaticResource Text}" Content="我已阅读并同意上述许可协议" Checked="AcceptBox_Changed" Unchecked="AcceptBox_Changed"/>
+        </Grid>
+
+        <!-- 安装目录 -->
+        <Grid x:Name="DirPanel" Visibility="Collapsed">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/>
+          </Grid.RowDefinitions>
+          <TextBlock Text="选择安装位置" Grid.Row="0" FontSize="20" FontWeight="Bold" Foreground="{StaticResource Text}"/>
+          <TextBlock Text="安装程序将把文件安装到以下目录。" Grid.Row="1" FontSize="12" Foreground="{StaticResource Muted}" Margin="0,8,0,0"/>
+          <Grid Grid.Row="2" Margin="0,18,0,0">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="DirBox" Style="{StaticResource PillInput}"/>
+            <Button x:Name="BrowseBtn" Grid.Column="1" Content="浏览…" Margin="12,0,0,0"
+                    Style="{StaticResource PillButtonGhost}" Width="108" Height="42" Click="BrowseBtn_Click"/>
+          </Grid>
+        </Grid>
+
+        <!-- 安装中 -->
+        <StackPanel x:Name="InstallingPanel" Visibility="Collapsed" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+          <TextBlock Text="正在安装…" FontSize="20" FontWeight="Bold" Foreground="{StaticResource Text}" HorizontalAlignment="Center"/>
+          <TextBlock x:Name="StatusText" Text="准备中" FontSize="12" Foreground="{StaticResource Muted}" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+          <ProgressBar x:Name="Progress" Height="10" Margin="0,24,0,0" Minimum="0" Maximum="100" Value="0"
+                       Foreground="{StaticResource Brand}" Background="{StaticResource Soft}"/>
+        </StackPanel>
+
+        <!-- 完成 -->
+        <StackPanel x:Name="DonePanel" Visibility="Collapsed" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+          <Border Width="64" Height="64" CornerRadius="32" Background="{StaticResource Brand}"
+                  HorizontalAlignment="Center">
+            <TextBlock Text="✓" Foreground="White" FontSize="30" FontWeight="Bold"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+          </Border>
+          <TextBlock Text="安装完成" FontSize="20" FontWeight="Bold" Foreground="{StaticResource Text}"
+                     HorizontalAlignment="Center" Margin="0,18,0,0"/>
+          <TextBlock x:Name="DoneSub" Text="已成功安装到你的电脑。" FontSize="12" Foreground="{StaticResource Muted}"
+                     HorizontalAlignment="Center" Margin="0,8,0,0"/>
+          <CheckBox x:Name="RunAfterBox" Margin="0,20,0,0" HorizontalAlignment="Center" FontSize="12"
+                    Foreground="{StaticResource Text}" Content="安装完成后运行" Visibility="Collapsed"/>
+        </StackPanel>
+      </Grid>
+
+      <!-- ===== 底部导航 ===== -->
+      <Grid Grid.Row="2" Margin="40,0,26,26">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+          <Button x:Name="BackBtn" Style="{StaticResource PillButtonGhost}" Width="110" Content="上一步" Click="BackBtn_Click"/>
+          <Button x:Name="NextBtn" Style="{StaticResource PillButton}" Width="150" Content="下一步" Margin="14,0,0,0" Click="NextBtn_Click"/>
+          <Button x:Name="InstallBtn" Style="{StaticResource PillButton}" Width="150" Content="安装" Margin="14,0,0,0" Visibility="Collapsed" Click="InstallBtn_Click"/>
+          <Button x:Name="FinishBtn" Style="{StaticResource PillButton}" Width="150" Content="完成" Margin="14,0,0,0" Visibility="Collapsed" Click="FinishBtn_Click"/>
+          <Button Style="{StaticResource PillButtonGhost}" Width="110" Content="取消" Margin="14,0,0,0" Click="CloseBtn_Click"/>
+        </StackPanel>
+      </Grid>
+    </Grid>
+  </Border>
+</Window>
