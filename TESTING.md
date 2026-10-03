@@ -1,5 +1,13 @@
 # PILinstaller 测试说明
 
+- 测试完成：是（2026-10-04）
+- 测试日期：2026-10-04
+- 测试内容：单元：formatSize、escapeWinName、generateInno 脚本生成、fillTemplate；注入：appName/文件名危险字符清洗、路径透传
+- 运行命令：cd builder && npm test
+- 测试框架：Vitest
+- 模型：豆包（Doubao）生成
+
+
 安装器生成器（React+TS GUI，核心逻辑在 `builder/src/lib/`）。测试用 **Vitest**，覆盖纯逻辑层。
 
 ## 运行方式
